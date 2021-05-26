@@ -13,6 +13,7 @@ const express = require('express');
 
 // init express
 const app = express();
+app.use(express.static(path.join(__dirname, 'client/build')))
 //Autorisation les requetes pour CLIENTS_URL
 const cors = require('cors');
 const corsOptions = {
@@ -28,6 +29,7 @@ app.use(cors(corsOptions));
 // bodyparser middleware
 app.use(bodyParser.json());
 app.use(cookieParser());
+app.use(express.static('public'));
 //jwt (chaque fois qu'il y a une requet * cad n'import quelle requête on doit vérifier si le user dispose d'un token)
 app.get('/*', checkUser);
 app.get('/jwtid',requireAuth,(req,res)=>{
@@ -42,5 +44,9 @@ app.use('/api/posts',posts);
 app.use('/uploads/avatar', express.static(process.cwd() + '/uploads/avatar'));
 app.use('/uploads/posts', express.static(process.cwd() + '/uploads/posts'));
 app.use('/default', express.static(process.cwd() + '/default'));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname + '/client/build/index.html'))
+})
 
 module.exports=app;

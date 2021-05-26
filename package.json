@@ -8,7 +8,8 @@
     "start": "node server.js",
     "server": "nodemon server.js",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "test": "jest"
+    "test": "jest",
+    "heroku-postbuild": "cd Client && npm install && npm run build"
   },
   "author": "Chouaib&Abire",
   "license": "ISC",
