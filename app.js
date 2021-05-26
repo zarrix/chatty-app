@@ -1,3 +1,4 @@
+const path = require('path');
 //importation des routes
 const users = require('./routes/api/users.routes');
 const posts = require('./routes/api/posts.routes');
